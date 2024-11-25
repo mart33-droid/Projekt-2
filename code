@@ -30,7 +30,7 @@ def main():
     print("Let's play a bulls and cows game.")
     print("Write a four-digit number.")
     print(
-        "The digits must be all different" 
+        "The digits must be all different " 
         "and first digit must not be 0."
         )
     secret = generate_secret_number()
