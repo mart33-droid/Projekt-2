@@ -1,0 +1,62 @@
+"""
+projekt_2.py: druhý projekt do Engeto Online Python Akademie
+
+author: Martin Blecha
+email: martin.blecha33@gmail.com
+"""
+
+import random
+
+def generate_secret_number():
+    while True:
+        number = random.randint(1000, 9999)
+        if len(set(str(number))) == 4:
+            return str(number)
+  
+def calculate_bulls_and_cows(secret, guess):
+    bulls = 0
+    cows = 0
+    for i in range(4):
+        if guess[i] == secret[i]:
+            bulls += 1
+        elif guess[i] in secret:
+            cows += 1
+    return bulls, cows
+
+def main():
+    print("Hi, there!")
+    print("-----------------------------------------------")
+    print("I have generated a random 4 digit number for you.")
+    print("Let's play a bulls and cows game.")
+    print("Write a four-digit number.")
+    print(
+        "The digits must be all different" 
+        "and first digit must not be 0."
+        )
+    secret = generate_secret_number()
+    attempts = 0
+    while True:
+        guess = input("Enter a 4-digit number: ")
+        if len(guess) != 4 or not guess.isdigit() \
+        or len(set(guess)) != 4 or guess[0] == '0':
+            print("-----------------------------------------------")
+            print("Invalid input. Try again!")
+            continue
+        attempts += 1
+        bulls, cows = calculate_bulls_and_cows(secret, guess)
+        print("-----------------------------------------------")
+        print(f">>> {guess}")
+        print(
+            f"{bulls} bull{'s' if bulls != 1 else ''}," 
+            f"{cows} cow{'s' if cows != 1 else ''}"
+            )
+        if bulls == 4:
+            print("-----------------------------------------------")
+            print(f">>> {guess}")
+            print(
+                f"Correct! You guessed the number in {attempts} attempts!"
+                )
+            break
+
+if __name__ == "__main__":
+    main()
